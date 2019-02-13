@@ -1,0 +1,54 @@
+{% include 'header.html' %}
+
+  <body>
+
+{% include 'navigation.html' %}
+
+<div class="container">
+<h1 style="text-align: center;"><strong>Powerplant Overview</strong></h1>
+<p style="text-align: center;">If a PLC is knocked offline, please reiginte fuel to continue production.</p>
+</div>
+
+    <!-- Page Content -->
+<div class="container">
+     <a class="navbar-brand" href="#">
+      <img src="/images/custom_powerplant.jpg" width="728" height="546" alt="">
+     </a>
+</div>
+
+<div class="container">
+<form method="POST">
+
+ <div class="submit_span col-md-4">
+
+ <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary">
+    <input type="radio" name="zero_out" value="0" id="option0" autocomplete="off" checked> Emergency Shutoff
+  </label>
+</div>
+
+ <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+ </button>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+</div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
+

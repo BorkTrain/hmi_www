@@ -1,0 +1,50 @@
+{% include 'header.html' %}
+
+  <body>
+
+{% include 'navigation.html' %}
+
+    <!-- Page Content -->
+    <div class="container">
+    
+{% if not session.get('logged_in') %}
+  <div class="login_span col-md-4">
+
+    <!-- Login -->
+    <div class="wrapper fadeInDown">
+      <form method="post" action="/login" class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+        <label for="user" class="sr-only">Username</label>
+        <input type="text" id="user" name="username" class="form-control" placeholder="USERNAME" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="ENTER PASSWORD HERE" required>
+        <button class="btn btn-lg btn-secondary btn-block" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+
+   AUTHENTICATED
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
+
