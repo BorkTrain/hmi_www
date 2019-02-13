@@ -38,6 +38,52 @@ def login_route():
         session['logged_in'] = 1 
     return redirect(url_for('index_route'))
 
+@app.route('/hmi',methods=['GET','POST'])
+@login_required
+def hmi_route():
+	if request.method == "POST":
+		if request.form.get('fuel_rate'):
+			print(request.form.get('fuel_rate'))
+			if request.form.get('fuel_rate') == '0':
+				fuel_rate_0()
+			elif request.form.get('fuel_rate') == '1':
+				fuel_rate_1()
+			elif request.form.get('fuel_rate') == '2':
+				fuel_rate_2()
+			else:
+				fuel_rate_3()
+		if request.form.get('waterpump_io'):
+			print(request.form.get('waterpump_io'))
+			if request.form.get('waterpump_io') == '0':
+				waterpump_off()
+			else:
+				waterpump_on()
+		if request.form.get('boiler_io'):
+			print(request.form.get('boiler_io'))
+			if request.form.get('boiler_io') == '0':
+				boiler_off()
+			else:
+				boiler_on()
+		if request.form.get('turbine_io'):
+			print(request.form.get('turbine_io'))
+			if request.form.get('turbine_io') == '0':
+				turbine_off()
+			else:
+				turbine_on()
+		if request.form.get('generator_io'):
+			print(request.form.get('generator_io'))
+			if request.form.get('generator_io') == '0':
+				generator_off()
+			else:
+				generator_on()
+		if request.form.get('pylon_io'):
+			print(request.form.get('pylon_io'))
+			if request.form.get('pylon_io') == '0':
+				pylon_off()
+			else:
+				pylon_on()
+	return render_template('hmi.html')
+
 @app.route('/status',methods=['GET','POST'])
 @login_required
 def status_route():
