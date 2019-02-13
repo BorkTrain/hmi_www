@@ -1,0 +1,114 @@
+{% include 'header.html' %}
+
+<style>
+.grid { 
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  }
+</style>
+
+{% include 'navigation.html' %}
+    <!-- Page Content -->
+<div class="container">
+ <p style="text-align: center;">This page is designed to show the selected option on each PLC.</p>
+</div>
+<main class="grid"> 
+ <form method="POST">
+  <p style="text-align: center;">Fuel Rate</p>
+  <div class="submit_span col-md-4">
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary">
+     <input type="radio" name="fuel_rate" value="0" id="option0" autocomplete="off" checked> Off
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="fuel_rate" value="1" id="option1" autocomplete="off"> Low
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="fuel_rate" value="2" id="option2" autocomplete="off"> Normal
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="fuel_rate" value="3" id="option3" autocomplete="off"> High
+    </label>
+   </div>
+   <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+   </button>
+  </div>
+ </form>
+ <form method="POST">
+   <p style="text-align: center;">Waterpump</p>
+   <div class="submit_span col-md-4">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+     <label class="btn btn-secondary active">
+      <input type="radio" name="waterpump_io" value="1" id="option1" autocomplete="off" checked> On
+     </label>
+     <label class="btn btn-secondary">
+      <input type="radio" name="waterpump_io" value="0" id="option2" autocomplete="off"> Off
+     </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+    </button>
+   </div>
+ </form>
+ <form method="POST">
+  <p style="text-align: center;">Boiler</p>
+  <div class="submit_span col-md-4">
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+     <input type="radio" name="boiler_io" value="1" id="option1" autocomplete="off" checked> On
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="boiler_io" value="0" id="option2" autocomplete="off"> Off
+    </label>
+   </div>
+   <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+   </button>
+  </div>
+ </form>
+ <form method="POST">
+  <p style="text-align: center;">Turbine</p>
+  <div class="submit_span col-md-4">
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+     <input type="radio" name="turbine_io" value="1" id="option1" autocomplete="off" checked> On
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="turbine_io" value="0" id="option2" autocomplete="off"> Off
+    </label>
+   </div>
+   <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+   </button>
+  </div>
+ </form>
+ <form method="POST">
+  <p style="text-align: center;">Generator</p>
+  <div class="submit_span col-md-4">
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+     <input type="radio" name="generator_io" value="1" id="option1" autocomplete="off" checked> On
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="generator_io" value="0" id="option2" autocomplete="off"> Off
+    </label>
+   </div>
+   <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+   </button>
+  </div>
+ </form>
+ <form method="POST">
+  <p style="text-align: center;">Pylon</p>
+  <div class="submit_span col-md-4">
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+     <input type="radio" name="pylon_io" value="1" id="option1" autocomplete="off" checked> On
+    </label>
+    <label class="btn btn-secondary">
+     <input type="radio" name="pylon_io" value="0" id="option2" autocomplete="off"> Off
+    </label>
+   </div>
+   <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+   </button>
+  </div>
+ </form>
+
+{% include 'footer.html' %}
