@@ -5,7 +5,13 @@
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
   }
+
+.grid img {
+  border: 5px solid #ccc;
+}
+
 </style>
 
 {% include 'navigation.html' %}
@@ -39,7 +45,7 @@
    <p style="text-align: center;">Waterpump</p>
    <div class="submit_span col-md-4">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-     <label class="btn btn-secondary active">
+     <label class="btn btn-secondary">
       <input type="radio" name="waterpump_io" value="1" id="option1" autocomplete="off" checked> On
      </label>
      <label class="btn btn-secondary">
@@ -54,7 +60,7 @@
   <p style="text-align: center;">Boiler</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="boiler_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -69,7 +75,7 @@
   <p style="text-align: center;">Turbine</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="turbine_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -84,7 +90,7 @@
   <p style="text-align: center;">Generator</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="generator_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -99,7 +105,7 @@
   <p style="text-align: center;">Pylon</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="pylon_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -110,5 +116,6 @@
    </button>
   </div>
  </form>
+</main>
 
 {% include 'footer.html' %}
