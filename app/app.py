@@ -16,6 +16,7 @@ from functools import wraps
 
 app = Flask(__name__, static_url_path='')
 app.secret_key = 'secret_key_'
+stat = {}
 
 def login_required(f):
     @wraps(f)
@@ -45,60 +46,74 @@ def hmi_route():
 		if request.form.get('fuel_rate'):
 			print(request.form.get('fuel_rate'))
 			if request.form.get('fuel_rate') == '0':
+				stat['fuel_stat'] = "OFF"
 				fuel_rate_0()
 			elif request.form.get('fuel_rate') == '1':
+				stat['fuel_stat'] = "LOW"
 				fuel_rate_1()
 			elif request.form.get('fuel_rate') == '2':
+				stat['fuel_stat'] = "NORMAL"
 				fuel_rate_2()
 			else:
+				stat['fuel_stat'] = "MAX"
 				fuel_rate_3()
 		if request.form.get('waterpump_io'):
 			print(request.form.get('waterpump_io'))
-			if request.form.get('waterpump_io') == '0':
-				waterpump_off()
-			else:
+			if request.form.get('waterpump_io') == '1':
+				stat['waterpump_stat'] = "ON"
 				waterpump_on()
+			else:
+				stat['waterpump_stat'] = "OFF"
+				waterpump_off()
 		if request.form.get('boiler_io'):
 			print(request.form.get('boiler_io'))
-			if request.form.get('boiler_io') == '0':
-				boiler_off()
-			else:
+			if request.form.get('boiler_io') == '1':
+				stat['boiler_stat'] = "ON"
 				boiler_on()
+			else:
+				stat['boiler_stat'] = "OFF"
+				boiler_off()
 		if request.form.get('turbine_io'):
 			print(request.form.get('turbine_io'))
-			if request.form.get('turbine_io') == '0':
-				turbine_off()
-			else:
+			if request.form.get('turbine_io') == '1':
+				stat['turbine_stat'] = "ON"
 				turbine_on()
+			else:
+				stat['turbine_stat'] = "OFF"
+				turbine_off()
 		if request.form.get('generator_io'):
 			print(request.form.get('generator_io'))
-			if request.form.get('generator_io') == '0':
-				generator_off()
-			else:
+			if request.form.get('generator_io') == '1':
+				stat['generator_stat'] = "ON"
 				generator_on()
+			else:
+				stat['generator_stat'] = "OFF"
+				generator_off()
 		if request.form.get('pylon_io'):
 			print(request.form.get('pylon_io'))
-			if request.form.get('pylon_io') == '0':
-				pylon_off()
-			else:
+			if request.form.get('pylon_io') == '1':
+				stat['pylon_stat'] = "ON"
 				pylon_on()
-	return render_template('hmi.html')
+			else:
+				stat['pylon_stat'] = "OFF"
+				pylon_off()
+		if request.form.get('zero_out'):
+			print (request.form.get('zero_out'))
+			if request.form.get('zero_out') == '0':
+				stat['fuel_stat'] = "OFF"
+				stat['waterpump_stat'] = "OFF"
+				stat['boiler_stat'] = "OFF"
+				stat['turbine_stat'] = "OFF"
+				stat['generator_stat'] = "OFF"
+				stat['pylon_stat'] = "OFF"
+				emergency_shutoff()
+		else:
+			pass
+	return render_template('hmi.html',stat=stat)
 
 @app.route('/status',methods=['GET','POST'])
 @login_required
 def status_route():
-	if request.method == 'POST':
-		print(request.form.get('zero_out'))
-		if request.form.get('zero_out') == '0':
-			for i in range(1,17):
-				send_to_plc(i,0,PLCS.get('FUEL'))
-				send_to_plc(i,0,PLCS.get('WATERPUMP'))
-				send_to_plc(i,0,PLCS.get('BOILER'))
-				send_to_plc(i,0,PLCS.get('TURBINE'))
-				send_to_plc(i,0,PLCS.get('GENERATOR'))
-				send_to_plc(i,0,PLCS.get('PYLON'))
-		else:
-			return render_template('status.html')
 	return render_template('status.html')
 
 @app.route('/fuel',methods=['GET','POST'])
@@ -107,47 +122,13 @@ def fuel_route():
 	if request.method == 'POST':
 		print(request.form.get('fuel_rate'))
 		if request.form.get('fuel_rate') == '0':
-			for i in range(1,17):
-				send_to_plc(i,0,PLCS.get('FUEL'))
-			for i in (10,11):
-				send_to_plc(i,0,PLCS.get('WATERPUMP'))
-				send_to_plc(i,0,PLCS.get('BOILER'))
-				send_to_plc(i,0,PLCS.get('TURBINE'))
-				send_to_plc(i,0,PLCS.get('GENERATOR'))
-				send_to_plc(i,0,PLCS.get('PYLON'))
+			fuel_rate_0()
 		elif request.form.get('fuel_rate') == '1':
-			for i in range(1,17):
-				send_to_plc(i,1,PLCS.get('FUEL'))
-			send_to_plc(10,1,PLCS.get('WATERPUMP'))
-			for i in (10,11):
-				send_to_plc(i,1,PLCS.get('BOILER'))
-				send_to_plc(i,1,PLCS.get('TURBINE'))
-				send_to_plc(i,1,PLCS.get('GENERATOR'))
-				send_to_plc(i,1,PLCS.get('PYLON'))
+			fuel_rate_1()
 		elif request.form.get('fuel_rate') == '2':
-			for i in range(1,17):
-				send_to_plc(i,2,PLCS.get('FUEL'))
-			send_to_plc(10,1,PLCS.get('WATERPUMP'))
-			send_to_plc(10,1,PLCS.get('BOILER'))
-			send_to_plc(10,1,PLCS.get('TURBINE'))
-			send_to_plc(10,1,PLCS.get('GENERATOR'))
-			send_to_plc(10,1,PLCS.get('PYLON'))
-			send_to_plc(11,2,PLCS.get('BOILER'))
-			send_to_plc(11,2,PLCS.get('TURBINE'))
-			send_to_plc(11,2,PLCS.get('GENERATOR'))
-			send_to_plc(11,2,PLCS.get('PYLON'))
+			fuel_rate_2()
 		elif request.form.get('fuel_rate') == '3':
-			for i in range(1,17):
-				send_to_plc(i,3,PLCS.get('FUEL'))
-			send_to_plc(10,1,PLCS.get('WATERPUMP'))
-			send_to_plc(10,1,PLCS.get('BOILER'))
-			send_to_plc(10,1,PLCS.get('TURBINE'))
-			send_to_plc(10,1,PLCS.get('GENERATOR'))
-			send_to_plc(10,1,PLCS.get('PYLON'))
-			send_to_plc(11,3,PLCS.get('BOILER'))
-			send_to_plc(11,3,PLCS.get('TURBINE'))
-			send_to_plc(11,3,PLCS.get('GENERATOR'))
-			send_to_plc(11,3,PLCS.get('PYLON'))
+			fuel_rate_3()
 		else:
 			return render_template('fuel.html')
 	return render_template('fuel.html')
@@ -158,16 +139,9 @@ def waterpump_route():
 	if request.method == 'POST':
 		print(request.form.get('on_off'))
 		if request.form.get('on_off') == '0':
-			for i in range(1,10):
-				send_to_plc(i,0,PLCS.get('WATERPUMP'))
-			for i in (10,11):
-				send_to_plc(i,0,PLCS.get('BOILER'))
-				send_to_plc(i,0,PLCS.get('TURBINE'))
-				send_to_plc(i,0,PLCS.get('GENERATOR'))
-				send_to_plc(i,0,PLCS.get('PYLON'))
+			waterpump_off()
 		else:
-			for i in range(1,10):
-				send_to_plc(i,1,PLCS.get('WATERPUMP'))
+			waterpump_on()
 	return render_template('waterpump.html')
 	
 @app.route('/boiler',methods=['GET','POST'])
@@ -176,15 +150,9 @@ def boiler_route():
 	if request.method == 'POST':
 		print(request.form.get('on_off'))
 		if request.form.get('on_off') == '0':
-			for i in range(1,17):
-				send_to_plc(i,0,PLCS.get('BOILER'))
-			for i in (10,11):
-				send_to_plc(i,0,PLCS.get('TURBINE'))
-				send_to_plc(i,0,PLCS.get('GENERATOR'))
-				send_to_plc(i,0,PLCS.get('PYLON'))
+			boier_off()
 		else:
-			for i in range(1,10):
-				send_to_plc(i,1,PLCS.get('BOILER'))
+			boiler_on()
 	return render_template('boiler.html')
 
 @app.route('/turbine',methods=['GET','POST'])
@@ -193,14 +161,9 @@ def turbine_route():
 	if request.method == 'POST':
 		print(request.form.get('on_off'))
 		if request.form.get('on_off') == '0':
-			for i in range(1,17):
-				send_to_plc(i,0,PLCS.get('TURBINE'))
-			for i in (10,11):
-				send_to_plc(i,0,PLCS.get('GENERATOR'))
-				send_to_plc(i,0,PLCS.get('PYLON'))
+			turbine_off()
 		else:
-			for i in range(1,10):
-				send_to_plc(i,1,PLCS.get('TURBINE'))
+			turbine_on()
 	return render_template('turbine.html')
 
 @app.route('/generator',methods=['GET','POST'])
@@ -209,13 +172,9 @@ def generator_route():
 	if request.method == 'POST':
 		print(request.form.get('on_off'))
 		if request.form.get('on_off') == '0':
-			for i in range(1,17):
-				send_to_plc(i,0,PLCS.get('GENERATOR'))
-			for i in (10,11):
-				send_to_plc(i,0,PLCS.get('PYLON'))
+			generator_off()
 		else:
-			for i in range(1,10):
-				send_to_plc(i,1,PLCS.get('GENERATOR'))
+			generator_on()
 	return render_template('generator.html')
 
 @app.route('/pylon',methods=['GET','POST'])
@@ -224,11 +183,9 @@ def pylon_route():
 	if request.method == 'POST':
 		print(request.form.get('on_off'))
 		if request.form.get('on_off') == '0':
-			for i in range(1,17):
-				send_to_plc(i,0,PLCS.get('PYLON'))
+			pylon_off()
 		else:
-			for i in range(1,10):
-				send_to_plc(i,1,PLCS.get('PYLON'))
+			pylon_on()
 	return render_template('pylon.html')
 
 

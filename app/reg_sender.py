@@ -9,6 +9,16 @@ def send_to_plc(reg_loc,reg_value,ip):
 	modbusClient.write_register(reg_loc,reg_value)
 	return True
 
+def emergency_shutoff():
+	for i in range(1,17):
+		send_to_plc(i,0,PLCS.get('FUEL'))
+		send_to_plc(i,0,PLCS.get('WATERPUMP'))
+		send_to_plc(i,0,PLCS.get('BOILER'))
+		send_to_plc(i,0,PLCS.get('TURBINE'))
+		send_to_plc(i,0,PLCS.get('GENERATOR'))
+		send_to_plc(i,0,PLCS.get('PYLON'))
+	return True 
+
 def fuel_rate_0():
 	for i in range(1,17):
 		send_to_plc(i,0,PLCS.get('FUEL'))
