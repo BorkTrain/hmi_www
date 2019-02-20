@@ -3,9 +3,15 @@
 <style>
 .grid { 
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
   }
+
+.grid img {
+  border: 5px solid #ccc;
+}
+
 </style>
 
 {% include 'navigation.html' %}
@@ -16,6 +22,7 @@
 <main class="grid"> 
  <form method="POST">
   <p style="text-align: center;">Fuel Rate</p>
+  <p style="text-align: center;">Status: {{ stat.get('fuel_stat') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary">
@@ -37,9 +44,10 @@
  </form>
  <form method="POST">
    <p style="text-align: center;">Waterpump</p>
+   <p style="text-align: center;">Status: {{ stat.get('waterpump_stat') }}</p>
    <div class="submit_span col-md-4">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-     <label class="btn btn-secondary active">
+     <label class="btn btn-secondary">
       <input type="radio" name="waterpump_io" value="1" id="option1" autocomplete="off" checked> On
      </label>
      <label class="btn btn-secondary">
@@ -52,9 +60,10 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Boiler</p>
+  <p style="text-align: center;">Status: {{ stat.get('boiler_stat') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="boiler_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -67,9 +76,10 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Turbine</p>
+  <p style="text-align: center;">Status: {{ stat.get('turbine_stat') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="turbine_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -82,9 +92,10 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Generator</p>
+  <p style="text-align: center;">Status: {{ stat.get('generator_stat') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="generator_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -97,9 +108,10 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Pylon</p>
+  <p style="text-align: center;">Status: {{ stat.get('pylon_stat') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
+    <label class="btn btn-secondary">
      <input type="radio" name="pylon_io" value="1" id="option1" autocomplete="off" checked> On
     </label>
     <label class="btn btn-secondary">
@@ -110,5 +122,18 @@
    </button>
   </div>
  </form>
+ <form method="POST">
+  <p style="text-align: center;">Emergency Shutoff</p>
+  <div class="submit_span col-md-4">
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary">
+     <input type="radio" name="zero_out" value="0" id="option0" autocomplete="off" checked> Emergency Shutoff
+    </label>
+   </div>
+   <button class="btn btn-lg btn-primary btn-block" type="submit"> Submit
+   </button>
+  </div>
+ </form>
+</main>
 
 {% include 'footer.html' %}
