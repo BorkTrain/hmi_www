@@ -36,16 +36,16 @@ def fuel_rate_2():
 
 def fuel_rate_3():
 	for i in range(1,17):
-		send_to_plc(i,3,PLCS.get('FUEL'))
+		send_to_plc(i,4,PLCS.get('FUEL'))
 	return True 
 
 def waterpump_off():
-	for i in range(1,10):
+	for i in range(1,17):
 		send_to_plc(i,0,PLCS.get('WATERPUMP'))
 	return True 
 
 def waterpump_on():
-	for i in range(1,10):
+	for i in range(1,17):
 		send_to_plc(i,1,PLCS.get('WATERPUMP'))
 	return True 
 
@@ -55,7 +55,7 @@ def boiler_off():
 	return True 
 
 def boiler_on():
-	for i in range(1,10):
+	for i in range(1,17):
 		send_to_plc(i,1,PLCS.get('BOILER'))
 	return True 
 
@@ -65,7 +65,7 @@ def turbine_off():
 	return True 
 
 def turbine_on():
-	for i in range(1,10):
+	for i in range(1,17):
 		send_to_plc(i,1,PLCS.get('TURBINE'))
 	return True 
 
@@ -75,7 +75,7 @@ def generator_off():
 	return True 
 
 def generator_on():
-	for i in range(1,10):
+	for i in range(1,17):
 		send_to_plc(i,1,PLCS.get('GENERATOR'))
 	return True 
 
@@ -85,6 +85,6 @@ def pylon_off():
 	return True 
 
 def pylon_on():
-	for i in range(1,10):
+	for i in range(1,17):
 		send_to_plc(i,1,PLCS.get('PYLON'))
 	return True 
