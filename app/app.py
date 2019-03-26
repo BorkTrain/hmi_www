@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from flask import Flask
 from flask import abort
@@ -42,8 +42,8 @@ def login_route():
 @app.route('/hmi',methods=['GET','POST'])
 @login_required
 def hmi_route():
+	get_plc = get_plc_stat()
 	if request.method == "POST":
-		get_plc_stat = get_plc_stat()
 		if request.form.get('fuel_rate'):
 			print(request.form.get('fuel_rate'))
 			if request.form.get('fuel_rate') == '0':
@@ -88,9 +88,12 @@ def hmi_route():
 			print (request.form.get('zero_out'))
 			if request.form.get('zero_out') == '0':
 				emergency_shutoff()
+			else:
+				pass
 		else:
 			pass
-	return render_template('hmi.html',get_plc_stat=get_plc_stat)
+	print (get_plc_stat)
+	return render_template('hmi.html',get_plc_stat=get_plc)
 
 @app.route('/status',methods=['GET','POST'])
 @login_required

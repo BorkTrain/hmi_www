@@ -16,8 +16,8 @@ def read_from_plc(reg_start,reg_stop,ip):
 	return res
 
 def get_plc_stat():
+	# res = {'FUEL':'off','WATERPUMP':'off','BOILER':'off','TURBINE':'off','GENERATOR':'off','PYLON':'off'}
 	res = {}
-	# res = {'FUEL':'off'|'low'|'norm'|'max','WATERPUMP':'off'|'on'}
 	for plc_name in PLCS:
 		plc_ip = PLCS.get(plc_name)
 		plc_vals = read_from_plc(1,16,plc_ip)
@@ -38,53 +38,53 @@ def get_plc_stat():
 def get_fuel_stat(plc_vals):
 	plc_sum = sum(plc_vals)
 	if plc_sum == 64:
-		rate = 'max'
+		rate = 'MAX'
 	elif plc_sum == 32:
-		rate = 'norm'
+		rate = 'Normal'
 	elif plc_sum == 16:
-		rate = 'low'
+		rate = 'Low'
 	else:
-		rate = 'off'
+		rate = 'OFF'
 	return rate
 
 def get_water_stat(plc_vals):
 	plc_sum = sum(plc_vals)
 	if plc_sum == 16:
-		rate = 'on'
+		rate = 'ON'
 	else:
-		rate = 'off'
+		rate = 'OFF'
 	return rate
 
 def get_boiler_stat(plc_vals):
 	plc_sum = sum(plc_vals)
 	if plc_sum == 16:
-		rate = 'open'
+		rate = 'OPEN'
 	else:
-		rate = 'closed'
+		rate = 'CLOSED'
 	return rate
 
 def get_turbine_stat(plc_vals):
 	plc_sum = sum(plc_vals)
 	if plc_sum == 16:
-		rate = 'on'
+		rate = 'ON'
 	else:
-		rate = 'off'
+		rate = 'OFF'
 	return rate
 
 def get_generator_stat(plc_vals):
 	plc_sum = sum(plc_vals)
 	if plc_sum == 16:
-		rate = 'on'
+		rate = 'ON'
 	else:
-		rate = 'off'
+		rate = 'OFF'
 	return rate
 
 def get_pylon_stat(plc_vals):
 	plc_sum = sum(plc_vals)
 	if plc_sum == 16:
-		rate = 'on'
+		rate = 'ON'
 	else:
-		rate = 'off'
+		rate = 'OFF'
 	return rate
 
 
