@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import time
 
-PLCS = {'FUEL':'10.10.1.120','WATERPUMP':'10.10.1.121','BOILER':'10.10.1.122','TURBINE':'10.10.1.123','GENERATOR':'10.10.1.124','PYLON':'10.10.1.125'}
+PLCS = {'FUEL':'192.168.26.120','WATERPUMP':'192.168.26.121','BOILER':'192.168.26.122','TURBINE':'192.168.26.123','GENERATOR':'192.168.26.124','PYLON':'192.168.26.125'}
 
 def send_to_plc(reg_loc,reg_value,ip):
 	from pymodbus.client.sync import ModbusTcpClient as ModbusClient

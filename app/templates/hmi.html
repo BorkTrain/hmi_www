@@ -22,7 +22,7 @@
 <main class="grid"> 
  <form method="POST">
   <p style="text-align: center;">Fuel Rate</p>
-  <p style="text-align: center;">Status: {{ stat.get('fuel_stat') }}</p>
+  <p style="text-align: center;">Status: {{ get_plc_stat.get('FUEL') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary">
@@ -44,7 +44,7 @@
  </form>
  <form method="POST">
    <p style="text-align: center;">Waterpump</p>
-   <p style="text-align: center;">Status: {{ stat.get('waterpump_stat') }}</p>
+   <p style="text-align: center;">Status: {{ get_plc_stat.get('WATERPUMP') }}</p>
    <div class="submit_span col-md-4">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
      <label class="btn btn-secondary">
@@ -60,7 +60,7 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Boiler</p>
-  <p style="text-align: center;">Status: {{ stat.get('boiler_stat') }}</p>
+  <p style="text-align: center;">Status: {{ get_plc_stat.get('BOILER') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary">
@@ -76,7 +76,7 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Turbine</p>
-  <p style="text-align: center;">Status: {{ stat.get('turbine_stat') }}</p>
+  <p style="text-align: center;">Status: {{ get_plc_stat.get('TURBINE') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary">
@@ -92,7 +92,7 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Generator</p>
-  <p style="text-align: center;">Status: {{ stat.get('generator_stat') }}</p>
+  <p style="text-align: center;">Status: {{ get_plc_stat.get('GENERATOR') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary">
@@ -108,7 +108,7 @@
  </form>
  <form method="POST">
   <p style="text-align: center;">Pylon</p>
-  <p style="text-align: center;">Status: {{ stat.get('pylon_stat') }}</p>
+  <p style="text-align: center;">Status: {{ get_plc_stat.get('PYLON') }}</p>
   <div class="submit_span col-md-4">
    <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary">
