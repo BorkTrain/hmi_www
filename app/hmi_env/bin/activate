@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/hmi/hmi/app/hmi_env"
+VIRTUAL_ENV="/home/hmi/hmi_www/app/hmi_env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
