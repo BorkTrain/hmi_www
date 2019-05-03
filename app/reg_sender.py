@@ -2,89 +2,60 @@
 
 PLCS = {'FUEL':'192.168.26.120','WATERPUMP':'192.168.26.121','BOILER':'192.168.26.122','TURBINE':'192.168.26.123','GENERATOR':'192.168.26.124','PYLON':'192.168.26.125'}
 
-def send_to_plc(reg_loc,reg_value,ip):
-	print('++ reg_loc: %s reg_value %s ip %s' % (reg_loc, reg_value, ip))
-	from pymodbus.client.sync import ModbusTcpClient as ModbusClient
-	modbusClient = ModbusClient(ip, port=5020)
-	modbusClient.write_register(reg_loc,reg_value)
+def send_to_plc(ip,start_reg,value,count):
+	value_space = str(value) + ' '
+	reg_val = str(value_space) * int(count)
+	reg_write = "modbus write "+ ip + ' ' + start_reg + ' ' + reg_val
+	os.system(reg_write)
 	return True
 
 def emergency_shutoff():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('FUEL'))
-		send_to_plc(i,0,PLCS.get('WATERPUMP'))
-		send_to_plc(i,0,PLCS.get('BOILER'))
-		send_to_plc(i,0,PLCS.get('TURBINE'))
-		send_to_plc(i,0,PLCS.get('GENERATOR'))
-		send_to_plc(i,0,PLCS.get('PYLON'))
+	send_to_plc(PLCS.get('FUEL'),'%MW1',0,16)
+	send_to_plc(PLCS.get('WATERPUMP'),'%MW1',0,16)
+	send_to_plc(PLCS.get('BOILER'),'%MW1',0,16)
+	send_to_plc(PLCS.get('TURBINE'),'%MW1',0,16)
+	send_to_plc(PLCS.get('GENERATOR'),'%MW1',0,16)
+	send_to_plc(PLCS.get('PYLON'),'%MW1',0,16)
 	return True 
 
 def fuel_rate_0():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('FUEL'))
-	return True
+	send_to_plc(PLCS.get('FUEL'),'%MW1',0,16)
 
 def fuel_rate_1():
-	for i in range(1,17):
-		send_to_plc(i,1,PLCS.get('FUEL'))
-	return True
+	send_to_plc(PLCS.get('FUEL'),'%MW1',1,16)
 
 def fuel_rate_2():
-	for i in range(1,17):
-		send_to_plc(i,2,PLCS.get('FUEL'))
-	return True
+	send_to_plc(PLCS.get('FUEL'),'%MW1',2,16)
 
 def fuel_rate_3():
-	for i in range(1,17):
-		send_to_plc(i,4,PLCS.get('FUEL'))
-	return True 
+	send_to_plc(PLCS.get('FUEL'),'%MW1',3,16) 
 
 def waterpump_off():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('WATERPUMP'))
-	return True 
+	send_to_plc(PLCS.get('WATERPUMP'),'%MW1',0,16)
 
 def waterpump_on():
-	for i in range(1,17):
-		send_to_plc(i,1,PLCS.get('WATERPUMP'))
-	return True 
+	send_to_plc(PLCS.get('WATERPUMP'),'%MW1',1,16) 
 
 def boiler_off():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('BOILER'))
-	return True 
+	send_to_plc(PLCS.get('BOILER'),'%MW1',0,16) 
 
 def boiler_on():
-	for i in range(1,17):
-		send_to_plc(i,1,PLCS.get('BOILER'))
-	return True 
+	send_to_plc(PLCS.get('BOILER'),'%MW1',1,16) 
 
 def turbine_off():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('TURBINE'))
-	return True 
+	send_to_plc(PLCS.get('TURBINE'),'%MW1',0,16) 
 
 def turbine_on():
-	for i in range(1,17):
-		send_to_plc(i,1,PLCS.get('TURBINE'))
-	return True 
+	send_to_plc(PLCS.get('TURBINE'),'%MW1',1,16)  
 
 def generator_off():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('GENERATOR'))
-	return True 
+	send_to_plc(PLCS.get('GENERATOR'),'%MW1',0,16)  
 
 def generator_on():
-	for i in range(1,17):
-		send_to_plc(i,1,PLCS.get('GENERATOR'))
-	return True 
+	send_to_plc(PLCS.get('GENERATOR'),'%MW1',1,16) 
 
 def pylon_off():
-	for i in range(1,17):
-		send_to_plc(i,0,PLCS.get('PYLON'))
-	return True 
+	send_to_plc(PLCS.get('PYLON'),'%MW1',0,16)  
 
 def pylon_on():
-	for i in range(1,17):
-		send_to_plc(i,1,PLCS.get('PYLON'))
-	return True 
+	send_to_plc(PLCS.get('PYLON'),'%MW1',1,16)   
