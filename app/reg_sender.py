@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 
 PLCS = {'FUEL':'192.168.26.120','WATERPUMP':'192.168.26.121','BOILER':'192.168.26.122','TURBINE':'192.168.26.123','GENERATOR':'192.168.26.124','PYLON':'192.168.26.125'}
 
@@ -7,7 +8,6 @@ def send_to_plc(ip,start_reg,value,count):
 	reg_val = str(value_space) * int(count)
 	reg_write = "modbus write "+ ip + ' ' + start_reg + ' ' + reg_val
 	os.system(reg_write)
-	return True
 
 def emergency_shutoff():
 	send_to_plc(PLCS.get('FUEL'),'%MW1',0,16)
@@ -28,7 +28,7 @@ def fuel_rate_2():
 	send_to_plc(PLCS.get('FUEL'),'%MW1',2,16)
 
 def fuel_rate_3():
-	send_to_plc(PLCS.get('FUEL'),'%MW1',3,16) 
+	send_to_plc(PLCS.get('FUEL'),'%MW1',4,16) 
 
 def waterpump_off():
 	send_to_plc(PLCS.get('WATERPUMP'),'%MW1',0,16)
